@@ -1,0 +1,13 @@
+name string
+date datetime
+description string
+image string
+capacity decimal
+email string
+phoneNumber string
+streetName  string
+streetNumber    decimal
+ZIP decimal
+city string
+URL string
+eventType string
