@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Events;
 use App\Form\EventsType;
 use App\Repository\EventsRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,20 @@ class EventsController extends AbstractController
     }
 
     #[Route('/new', name: 'app_events_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader ): Response
     {
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $picture = $form->get('image')->getData();
+        if ($picture) {
+            $pictureName = $fileUploader->upload($picture);
+            $event->setImage($pictureName);
+        } else {
+            $event->setImage("event.jpg");
+        }
             $entityManager->persist($event);
             $entityManager->flush();
 
