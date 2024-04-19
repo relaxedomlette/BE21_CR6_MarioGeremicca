@@ -31,12 +31,13 @@ class EventsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $picture = $form->get('image')->getData();
-        if ($picture) {
-            $pictureName = $fileUploader->upload($picture);
-            $event->setImage($pictureName);
-        } else {
-            $event->setImage("event.jpg");
+            $imageFile = $form->get('image')->getData();
+        if ($imageFile) {
+            $imageFileName = $fileUploader->upload($imageFile);
+            $event->setImage($imageFileName);
+        }
+        else{
+            $event-> setImage("event.jpg");
         }
             $entityManager->persist($event);
             $entityManager->flush();
@@ -59,12 +60,21 @@ class EventsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_events_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Events $event, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Events $event, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(EventsType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           
+                $imageFile = $form->get('image')->getData();
+                if ($imageFile) {
+                    if ($event->getImage() !='event.jpg'){
+                        unlink($this->getParameter('image_directory'). '/' . $event->getImage());
+                    }
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $event->setImage($imageFileName);
+                }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
@@ -79,7 +89,9 @@ class EventsController extends AbstractController
     #[Route('/{id}', name: 'app_events_delete', methods: ['POST'])]
     public function delete(Request $request, Events $event, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->getPayload()->get('_token'))) { if ($event->getImage() !='event.jpg'){
+            unlink($this->getParameter('image_directory'). '/' . $event->getImage());
+        }
             $entityManager->remove($event);
             $entityManager->flush();
         }

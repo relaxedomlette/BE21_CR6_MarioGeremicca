@@ -14,21 +14,20 @@ class EventsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('date', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('description')
-            ->add('image')
-            ->add('capacity')
-            ->add('email')
-            ->add('phoneNumber')
-            ->add('streetName')
-            ->add('streetNumber')
-            ->add('ZIP')
-            ->add('city')
-            ->add('URL')
-            ->add('eventType')
+            
+            ->add('name', null,['attr'=> ['class' => 'form-control ','placeholder' =>'product name']])
+            ->add('date', null, ['attr'=> ['widget' => 'single_text','class' => 'form-control','placeholder' =>'description']])
+            ->add('description', null,['attr'=> ['class' => 'form-control','placeholder' =>'description']])
+            ->add('image', null,['attr'=> ['class' => 'form-control','placeholder' =>'image']])
+            ->add('capacity', null,['attr'=> ['class' => 'form-control','placeholder' =>'capacity']])
+            ->add('email', null,['attr'=> ['class' => 'form-control','placeholder' =>'email']])
+            ->add('phoneNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'phoneNumber']])
+            ->add('streetName', null,['attr'=> ['class' => 'form-control','placeholder' =>'streetName']])
+            ->add('streetNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'streetNumber']])
+            ->add('ZIP', null,['attr'=> ['class' => 'form-control','placeholder' =>'ZIP']])
+            ->add('city', null,['attr'=> ['class' => 'form-control','placeholder' =>'city']])
+            ->add('URL', null,['attr'=> ['class' => 'form-control','placeholder' =>'URL']])
+            ->add('eventType', null,['attr'=> ['class' =>'form-control','placeholder' =>'eventType']])
 
 
             ->add('image', FileType::class, [
