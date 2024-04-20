@@ -15,19 +15,19 @@ class EventsType extends AbstractType
     {
         $builder
             
-            ->add('name', null,['attr'=> ['class' => 'form-control ','placeholder' =>'product name']])
+            ->add('name', null,['attr'=> ['class' => 'form-control ','placeholder' =>'event name']])
             ->add('date', null, ['attr'=> ['widget' => 'single_text','class' => 'form-control','placeholder' =>'description']])
             ->add('description', null,['attr'=> ['class' => 'form-control','placeholder' =>'description']])
             ->add('image', null,['attr'=> ['class' => 'form-control','placeholder' =>'image']])
             ->add('capacity', null,['attr'=> ['class' => 'form-control','placeholder' =>'capacity']])
             ->add('email', null,['attr'=> ['class' => 'form-control','placeholder' =>'email']])
-            ->add('phoneNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'phoneNumber']])
-            ->add('streetName', null,['attr'=> ['class' => 'form-control','placeholder' =>'streetName']])
-            ->add('streetNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'streetNumber']])
-            ->add('ZIP', null,['attr'=> ['class' => 'form-control','placeholder' =>'ZIP']])
+            ->add('phoneNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'phone number']])
+            ->add('streetName', null,['attr'=> ['class' => 'form-control','placeholder' =>'street name']])
+            ->add('streetNumber', null,['attr'=> ['class' => 'form-control','placeholder' =>'street number']])
+            ->add('ZIP', null,['attr'=> ['class' => 'form-control','placeholder' =>'ZIP-code']])
             ->add('city', null,['attr'=> ['class' => 'form-control','placeholder' =>'city']])
             ->add('URL', null,['attr'=> ['class' => 'form-control','placeholder' =>'URL']])
-            ->add('eventType', null,['attr'=> ['class' =>'form-control','placeholder' =>'eventType']])
+            ->add('eventType', null,['attr'=> ['class' =>'form-control','placeholder' =>'event type']])
 
 
             ->add('image', FileType::class, [

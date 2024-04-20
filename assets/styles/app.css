@@ -2,9 +2,27 @@ body {
   background-color: white;
 }
 
+.card {
+  position: relative;
+}
+
 .card-title {
   text-align: center;
 }
 .card-text {
   text-align: center;
+}
+.btnBottom {
+  position: absolute;
+  bottom: 2px;
+}
+
+.btnAlign {
+  display: flex;
+  justify-content: space-around;
+
+  margin-left: 5px;
+}
+.card-img-top {
+  height: 190px;
 }

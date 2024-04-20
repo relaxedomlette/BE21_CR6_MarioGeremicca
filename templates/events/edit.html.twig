@@ -5,9 +5,10 @@ block body %}
   <h1>Edit Events</h1>
 
   {{ include("events/_form.html.twig", { button_label: "Update" }) }}
+  <div class="btnAlign">
+    <a class="btn btn-warning" href="{{ path('app_events_index') }}">go back</a>
 
-  <a class="btn btn-warning" href="{{ path('app_events_index') }}">go back</a>
-
-  {{ include("events/_delete_form.html.twig") }}
+    {{ include("events/_delete_form.html.twig") }}
+  </div>
 </div>
 {% endblock %}

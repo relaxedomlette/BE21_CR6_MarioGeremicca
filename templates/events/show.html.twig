@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Events{% endblock %} {% block
 body %}
 <div class="container" width="60%">
-  <h1>Events</h1>
+  <h1 style="text-align: center">Events Details</h1>
 
   <div class="mb-5">
     <div class="row g-1 container-fluid card shadow-lg bg-card-color">
@@ -18,26 +18,32 @@ body %}
           {{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}.
         </h5>
         <p class="card-text">{{ event.description }}</p>
-        <p class="card-text">{{ event.image }}</p>
-        <p class="card-text">{{ event.capacity }}</p>
-        <p class="card-text">{{ event.email }}</p>
-        <p class="card-text">{{ event.phoneNumber }}</p>
-        <p class="card-text">{{ event.streetName }}{{ event.streetNumber }}</p>
-        <p class="card-text">{{ event.ZIP }}{{ event.city }}</p>
-        <p class="card-text">{{ event.URL }}</p>
-        <p class="card-text">{{ event.eventType }}</p>
+        <p class="card-text">Capacity: {{ event.capacity }}</p>
+        <p class="card-text">E-Mail: {{ event.email }}</p>
+        <p class="card-text">Phone number: {{ event.phoneNumber }}</p>
+        <p class="card-text">
+          Address: {{ event.streetName }}{{ event.streetNumber }}
+        </p>
+        <p class="card-text">Details: {{ event.ZIP }}{{ event.city }}</p>
+        <p class="card-text">URL: {{ event.URL }}</p>
+        <p class="card-text">Event type: {{ event.eventType }}</p>
       </div>
+    </div>
+
+    <div class="btnAlign">
+      <a class="btn btn-warning" href="{{ path('app_events_index') }}"
+        >go back</a
+      >
+
+      <a
+        class="btn btn-primary"
+        href="{{ path('app_events_edit', { id: event.id }) }}"
+        >edit</a
+      >
+
+      {{ include("events/_delete_form.html.twig") }}
     </div>
   </div>
 </div>
 
-<a class="btn btn-warning" href="{{ path('app_events_index') }}">go back</a>
-
-<a
-  class="btn btn-primary"
-  href="{{ path('app_events_edit', { id: event.id }) }}"
-  >edit</a
->
-
-{{ include("events/_delete_form.html.twig") }}
 {% endblock %}

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\Events;
 use App\Form\EventsType;
 use App\Repository\EventsRepository;
@@ -10,8 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-
+use Symfony\Component\Routing\Annotation\Route;
 #[Route('/events')]
 class EventsController extends AbstractController
 {
@@ -20,6 +17,15 @@ class EventsController extends AbstractController
     {
         return $this->render('events/index.html.twig', [
             'events' => $eventsRepository->findAll(),
+        ]);
+    }
+    #[Route('/type/{eventType}', name: 'app_filter', methods: ['GET'])]
+    public function type(string $eventType, EventsRepository $eventsRepository): Response
+    {
+        $events = $eventsRepository->findBy(['eventType' => $eventType]);
+        return $this->render('filter.html.twig', [
+            'events' => $events,
+            'eventType' => $eventType,
         ]);
     }
 
